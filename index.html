@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+
+
+<style> 
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #1B6AAF;
+  border-radius: 10px;
+  outline: none;
+}
+
+input[type=email] {
+  width: 100%;
+  padding: 12px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #1B6AAF;
+  border-radius: 10px;
+  outline: none;
+}       
+
+input[type=button] {
+  background-color:  white;
+  color: #1B6AAF;
+  padding: 12px 50px;
+  border: 4px solid #1B6AAF;
+  border-radius: 30px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit] {
+  background-color:  white;
+  color: #1B6AAF;
+  padding: 12px 50px;
+  border: 4px solid #1B6AAF;
+  border-radius: 30px;
+  cursor: pointer;
+  float: right;
+}
+
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+input[type=email]:focus {
+  background-color: lightblue;
+}
+
+</style>
+<div id="web-to-lead-form-container">
+  <form id="web-to-lead-form">
+
+<div id="web-to-lead-form-container">
+    <form id="web-to-lead-form">
+        <div>
+            <input type="text" name="firstName" placeholder="First Name" size="50">
+        </div>
+        <div>
+            <input type="text" name="lastName" placeholder="Last Name" size="50" required>
+        </div>
+        <div>
+            <input type="text" name="phoneNumber" placeholder="Mobile" size="50" required>
+        </div>
+        <div>
+            <input type="email" name="emailAddress" placeholder="Email Address" size="50" required>
+        </div>
+        <div>
+
+                        <input type="submit" name="submit" value="submit">
+
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    let webToLeadFormElement = document.getElementById('web-to-lead-form');
+    let webToLeadFormIsSubmitted = false;
+
+    webToLeadFormElement.addEventListener('submit', event => {
+        event.preventDefault();
+
+        if (webToLeadFormIsSubmitted) {
+            return;
+        }
+
+        webToLeadFormIsSubmitted = true;
+        webToLeadFormElement.submit.setAttribute('disabled', 'disabled');
+
+        let payloadData = {
+            firstName: webToLeadFormElement.firstName.value || null,
+            lastName: webToLeadFormElement.lastName.value || null,
+            phoneNumber: webToLeadFormElement.phoneNumber.value || null,
+            emailAddress: webToLeadFormElement.emailAddress.value || null,
+        };
+
+        let url = 'https://approvedbycharles.espocloud.com/api/v1/LeadCapture/2eee97f18d0b19a766892c0d7a98b06d';
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('Accept', 'application/json');
+
+        xhr.send(JSON.stringify(payloadData));
+
+        window.location.href = "https://www.approvedbycharles.com";
+    });
+</script>
+</body>
+</html>
